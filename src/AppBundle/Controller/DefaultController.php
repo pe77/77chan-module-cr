@@ -20,7 +20,6 @@ class DefaultController extends Controller
         $router             = $this->container->get('router');
         $translator         = $this->get('translator');
 
-
         // da uma limpada
         $seed = md5($seed . $this->container->getParameter('secret'));
         
@@ -30,8 +29,7 @@ class DefaultController extends Controller
         srand($seed); // usa pro rand
 
         // image path
-        $image_path = $router->getContext()->getScheme() . '://'  . $router->getContext()->getHost() . $router->getContext()->getBaseUrl();
-        $image_path = '/image/cenouro.jpg';
+        $image_path = $request->getUriForPath('/image/cenouro.png');
 
         // gera
         $random = rand(1, 8);
