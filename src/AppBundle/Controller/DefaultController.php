@@ -85,6 +85,15 @@ class DefaultController extends Controller
 
         $return['data'] = $data;
 
-        return new JsonResponse($return);
+
+        $response = new JsonResponse($return);
+
+        // cache
+        $response->setPublic();
+
+        $response->setSharedMaxAge(600000);
+        $response->headers->addCacheControlDirective('must-revalidate', true);
+
+        return $response;
     }
 }
