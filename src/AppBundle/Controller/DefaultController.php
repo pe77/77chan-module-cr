@@ -26,7 +26,7 @@ class DefaultController extends Controller
         // extrai um numero de 0~9
         $seed  = substr(base_convert(md5($seed), 16, 10) , -1);
 
-        // srand($seed); // usa pro rand
+        srand($seed); // usa pro rand
 
         // image path
         $image_path = $request->getUriForPath('/image/cenouro.png');
