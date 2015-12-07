@@ -26,52 +26,59 @@ class DefaultController extends Controller
         // extrai um numero de 0~9
         $seed  = substr(base_convert(md5($seed), 16, 10) , -1);
 
-        srand($seed); // usa pro rand
+        // srand($seed); // usa pro rand
 
         // image path
         $image_path = $request->getUriForPath('/image/cenouro.png');
 
-        // gera
-        $random = rand(1, 8);
-
         $message = '';
 
         // são tão poucas opções que nem vale a pena criar DB
-        switch ($random) {
 
+        // balanceia as chances um pouco
+
+        switch (rand(1, 4)) {
             case 1:
                 $message = 'Yes!';
                 break;
 
+
             case 2:
                 $message = 'No!';
                 break;
-
-            case 3:
-                $message = 'Maybe.';
-                break;
-
-            case 4:
-                $message = 'Sure!';
-                break;
-
-            case 5:
-                $message = "I really don't care.";
-                break;
             
-            case 6:
-                $message = "Of course not.";
-                break;
+            default:
+                switch (rand(1, 6)) {
 
-            case 7:
-                $message = "Ask again.";
-                break;
+                    case 1:
+                        $message = 'Maybe.';
+                        break;
 
-            case 8:
-                $message = "Screw you!";
+                    case 2:
+                        $message = 'Sure!';
+                        break;
+
+                    case 3:
+                        $message = "I really don't care.";
+                        break;
+                    
+                    case 4:
+                        $message = "Of course not.";
+                        break;
+
+                    case 5:
+                        $message = "Ask again.";
+                        break;
+
+                    case 6:
+                        $message = "Screw you!";
+                        break;
+                    
+                }
                 break;
-            
         }
+
+        
 
         // traduz, se precisar
         $message = $translator->trans($message);
